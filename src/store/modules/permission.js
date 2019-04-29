@@ -49,6 +49,9 @@ const permission = {
       state.addRouters = routers;
       state.routers = constantRouterMap.concat(routers); // 可在公共路由上 添加指定路由
       // state.routers = routers; // 直接添加指定路由
+    },
+    CLEAR_ROUTERS: (state, resetData) => {
+      state.addRouters = resetData;
     }
   },
   actions: {
@@ -113,6 +116,10 @@ const permission = {
         commit("SET_ROUTERS", accessedRouters);
         resolve(accessedRouters);
       });
+    },
+    ClearRouters({ commit }) {
+      var clear = [];
+      commit("CLEAR_ROUTERS", clear);
     }
   }
 };

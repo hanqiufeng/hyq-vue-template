@@ -80,9 +80,7 @@ export default {
       immediate: true
     }
   },
-  created() {
-    // location.reload();
-  },
+  created() {},
   methods: {
     showPwd() {
       if (this.passwordType === "password") {

@@ -36,6 +36,7 @@ import { mapGetters } from "vuex";
 import Breadcrumb from "@/components/Breadcrumb";
 import Hamburger from "@/components/Hamburger";
 import { setTimeout } from "timers";
+import { resolve } from "url";
 // import store from "../../store";
 
 export default {
@@ -56,12 +57,21 @@ export default {
     //   this.$router.push(`/login?redirect=${this.$route.fullPath}`);
     // }
     logout() {
-      location.reload(); // 清除添加的路由
-      this.$store.dispatch("user/logout");
-      // 1s 后跳转到登录页
-      setTimeout(() => {
-        this.$router.push(`/login`);
-      }, 1000);
+      var hyq = new Promise(resolve => {
+        location.reload(); // 清除添加的路由
+        var res = "clear over";
+        resolve(res);
+      });
+      hyq.then(res => {
+        this.$store.dispatch("user/logout").then(() => {
+          this.$store.dispatch("ClearRouters").then(() => {
+            // this.$router.push(`/login`);
+            console.log(res);
+          });
+        });
+      });
+
+      // this.$store.dispatch("ClearRouters");
     }
   }
 };
